@@ -6,13 +6,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     final List<Employee> employeeList;
 
     public EmployeeServiceImpl() {
-        this.employeeList= new ArrayList<>();
+        this.employeeList = new ArrayList<>();
     }
 
     @Override
