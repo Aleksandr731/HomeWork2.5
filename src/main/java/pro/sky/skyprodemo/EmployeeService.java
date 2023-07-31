@@ -1,10 +1,12 @@
 package pro.sky.skyprodemo;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.Collection;
 
 public interface EmployeeService {
-    List<Integer> employee = new ArrayList<>(999999);
+    Employee add(String firstName, String lastName);
+    Employee remove(String firstName, String lastName);
+    Employee find(String firstName, String lastName);
 
-
+    Collection<Employee> findAll();
 }
