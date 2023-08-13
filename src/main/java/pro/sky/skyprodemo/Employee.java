@@ -17,7 +17,7 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EmployeeServiceImpl employee = (EmployeeServiceImpl) o;
-        return Objects.equals(firstName, employee.employeeList) && Objects.equals(lastName, employee.employeeList);
+        return Objects.equals(firstName, employee.employees) && Objects.equals(lastName, employee.employees);
     }
 
     @Override

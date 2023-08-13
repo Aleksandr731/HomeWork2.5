@@ -2,46 +2,46 @@ package pro.sky.skyprodemo;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    final List<Employee> employeeList;
+    final Map<String, Employee> employees;
 
     public EmployeeServiceImpl() {
-        this.employeeList = new ArrayList<>();
+        this.employees = new HashMap<>();
     }
 
     @Override
     public Employee add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
-        if (employeeList.contains(employee)) {
+        String key = generateKey(lastName, firstName);
+        if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedEx("Уже добавлен");
         }
-        employeeList.add(employee);
+        Employee employee = new Employee(firstName, lastName);
+        employees.put(key, employee);
         return employee;
     }
 
     @Override
     public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
 
-        if (employeeList.contains(employee)) {
-            employeeList.remove(employee);
-            return employee;
+        String key = generateKey(lastName, firstName);
+
+        Employee employee = employees.remove(key);
+
+        if (employee == null) {
+            throw new EmployeeNotFoundEx("Не найден");
         }
-        throw new EmployeeNotFoundEx("Не найден");
+        return employee;
     }
 
     @Override
     public Employee find(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-
-        if (employeeList.contains(employee)) {
+        String key = generateKey(lastName, firstName);
+        if (employees.containsKey(key)) {
             return employee;
         }
         throw new EmployeeNotFoundEx("Не найден");
@@ -49,6 +49,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> findAll() {
-        return Collections.unmodifiableList(employeeList);
+        return employees.values();
+    }
+
+    private String generateKey(String firstName, String lastName) {
+        return lastName + firstName;
     }
 }
