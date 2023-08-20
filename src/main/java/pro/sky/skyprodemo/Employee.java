@@ -5,11 +5,14 @@ import java.util.Objects;
 public class Employee {
     private final String firstName;
     private final String lastName;
+    public double getSalary;
+    private int department;
 
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, int department, double getSalary) {
         this.firstName = firstName;
         this.lastName = lastName;
-
+        this.getSalary = getSalary;
+        this.department = department;
     }
 
     @Override
@@ -38,5 +41,13 @@ public class Employee {
         return "Сотрудник: " + this.firstName + " "
                 + this.lastName;
 
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(int department) {
+        this.department = department;
     }
 }

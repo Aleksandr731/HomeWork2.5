@@ -3,6 +3,7 @@ package pro.sky.skyprodemo;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -14,12 +15,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+
     public Employee add(String firstName, String lastName) {
         String key = generateKey(lastName, firstName);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedEx("Уже добавлен");
         }
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, 0, 0);
         employees.put(key, employee);
         return employee;
     }
@@ -39,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+        Employee employee = new Employee(firstName, lastName, 0, 0);
         String key = generateKey(lastName, firstName);
         if (employees.containsKey(key)) {
             return employee;
