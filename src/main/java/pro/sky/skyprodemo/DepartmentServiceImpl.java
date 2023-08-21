@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class DepartmentServiceImpl implements DepartmentService {
+public abstract class DepartmentServiceImpl implements DepartmentService {
 
     private EmployeeService employeeService;
 
@@ -22,7 +22,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Employee maxSalaryEmployee(int department) {
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .max(Comparator.comparingDouble(employee -> employee.getSalary))
+                .max(Comparator.comparingDouble(employee -> employee.salary))
                 .orElseThrow(() -> new EmployeeNotFoundEx());
     }
 
@@ -30,7 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Employee minSalaryEmployee(int department) {
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartment() == department)
-                .min(Comparator.comparingDouble(employee -> employee.getSalary))
+                .min(Comparator.comparingDouble(employee -> employee.salary))
                 .orElseThrow(() -> new EmployeeNotFoundEx());
     }
 

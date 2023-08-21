@@ -3,7 +3,6 @@ package pro.sky.skyprodemo;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -16,20 +15,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
 
-    public Employee add(String firstName, String lastName) {
-        String key = generateKey(lastName, firstName);
+    public Employee add(String firstName, String lastName, int department, double salary) {
+        String key = generateKey(lastName, firstName, department, salary);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedEx("Уже добавлен");
         }
-        Employee employee = new Employee(firstName, lastName, 0, 0);
+        Employee employee = new Employee(firstName, lastName, department, salary);
         employees.put(key, employee);
         return employee;
     }
 
     @Override
-    public Employee remove(String firstName, String lastName) {
+    public Employee remove(String firstName, String lastName, int department, double salary) {
 
-        String key = generateKey(lastName, firstName);
+        String key = generateKey(lastName, firstName, department, salary);
 
         Employee employee = employees.remove(key);
 
@@ -40,9 +39,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName, 0, 0);
-        String key = generateKey(lastName, firstName);
+    public Employee find(String firstName, String lastName, int department, double salary) {
+        Employee employee = new Employee(firstName, lastName, department, salary);
+        String key = generateKey(lastName, firstName, department, salary);
         if (employees.containsKey(key)) {
             return employee;
         }
@@ -54,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.values();
     }
 
-    private String generateKey(String firstName, String lastName) {
-        return lastName + firstName;
+    private String generateKey(String firstName, String lastName, int department, double salary) {
+        return lastName + firstName + department + salary;
     }
 }
