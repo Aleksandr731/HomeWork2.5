@@ -29,11 +29,11 @@ public class DepartmentController {
         return departmentService.getEmployeesInDepartment(department);
     }
 
-    @GetMapping
+    @GetMapping(value = "/all", params = "maxSalaryByDepartment")
     public Employee getMaxSalaryByDepartment(@RequestParam int department) {
         return departmentService.maxSalaryEmployee(department);
     }
-    @GetMapping
+    @GetMapping(value = "/all", params = "minSalaryByDepartment")
     public Employee getMinSalaryByDepartment(@RequestParam int department) {
         return departmentService.minSalaryEmployee(department);
     }
