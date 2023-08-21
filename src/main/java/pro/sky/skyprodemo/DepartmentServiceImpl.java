@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public abstract class DepartmentServiceImpl implements DepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
 
     private EmployeeService employeeService;
 

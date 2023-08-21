@@ -29,5 +29,14 @@ public class DepartmentController {
         return departmentService.getEmployeesInDepartment(department);
     }
 
+    @GetMapping
+    public Employee getMaxSalaryByDepartment(@RequestParam int department) {
+        return departmentService.maxSalaryEmployee(department);
+    }
+    @GetMapping
+    public Employee getMinSalaryByDepartment(@RequestParam int department) {
+        return departmentService.minSalaryEmployee(department);
+    }
+
 
 }

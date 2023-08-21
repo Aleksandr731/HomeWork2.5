@@ -16,7 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
 
     public Employee add(String firstName, String lastName, int department, double salary) {
-        String key = generateKey(lastName, firstName, department, salary);
+        String key = generateKey(lastName, firstName);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedEx("Уже добавлен");
         }
@@ -28,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee remove(String firstName, String lastName, int department, double salary) {
 
-        String key = generateKey(lastName, firstName, department, salary);
+        String key = generateKey(lastName, firstName);
 
         Employee employee = employees.remove(key);
 
@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee find(String firstName, String lastName, int department, double salary) {
         Employee employee = new Employee(firstName, lastName, department, salary);
-        String key = generateKey(lastName, firstName, department, salary);
+        String key = generateKey(lastName, firstName);
         if (employees.containsKey(key)) {
             return employee;
         }
@@ -53,7 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees.values();
     }
 
-    private String generateKey(String firstName, String lastName, int department, double salary) {
-        return lastName + firstName + department + salary;
+    private String generateKey(String firstName, String lastName) {
+        return lastName + firstName;
     }
 }
