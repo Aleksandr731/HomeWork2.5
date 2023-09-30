@@ -6,24 +6,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeServiceImplTest {
 private final EmployeeServiceImpl underTest = new EmployeeServiceImpl();
+private Employee expectedEmployee = new Employee
+        ("Alex","Alexov", 4, 50_000);
     @Test
     void addEmployee_shouldAddEmployeeToMapAndReturnEmployee() {
-        String firstName = "Alex";
-        String lastName = "Alexov";
-        int department = 4;
-        double salary = 50_000;
-        Employee expectedEmployee = new Employee(firstName, lastName, department, salary);
 
-        Employee result = underTest.add(firstName, lastName, department, salary);
+        Employee result =underTest.add(expectedEmployee.getFirstName(),
+                expectedEmployee.getLastName(),
+                expectedEmployee.getDepartment(),
+                expectedEmployee.getSalary());
 
-        assertTrue(underTest.findAll().contains(
-                new Employee((firstName), lastName, department, salary)));
+        assertTrue(underTest.findAll().contains(expectedEmployee));
         assertEquals(expectedEmployee, result);
-
     }
-
     @Test
-    void remove() {
+    void addEmployee_shouldExceptionWhenNotEnoughMapSize() {
+        for (int i = 0; i < 3; i++) {
+            underTest.add((expectedEmployee.getFirstName() + i),
+                    (expectedEmployee.getFirstName() + i), expectedEmployee.getDepartment(),
+                    expectedEmployee.getSalary());
+        }
+
+        assertThrows(InvalidImputException.class,
+                () -> underTest.add(expectedEmployee.getFirstName(), expectedEmployee.getLastName(),
+                        expectedEmployee.getDepartment(), expectedEmployee.getSalary()));
+
     }
 
     @Test
