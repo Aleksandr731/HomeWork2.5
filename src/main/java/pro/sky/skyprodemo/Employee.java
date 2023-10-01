@@ -13,6 +13,7 @@ public class Employee {
     public double salary;
     public Object getSalary;
     private int department;
+    private Object employees;
 
     public Employee(String firstName, String lastName, int department, double salary) {
         this.firstName = capitalize(firstName.toLowerCase());
@@ -25,7 +26,7 @@ public class Employee {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EmployeeServiceImpl employee = (EmployeeServiceImpl) o;
+        Employee employee = (Employee) o;
         return Objects.equals(firstName, employee.employees) && Objects.equals(lastName, employee.employees);
     }
 
