@@ -53,7 +53,7 @@ private final Employee expectedEmployee = new Employee
     }
     @Test
     void removeEmployee_shouldRemoveEmployeeFromMap() {
-        Employee result =underTest.remove(expectedEmployee.getFirstName(),
+        Employee result = underTest.remove(expectedEmployee.getFirstName(),
                 expectedEmployee.getLastName(),
                 expectedEmployee.getDepartment(),
                 expectedEmployee.getSalary());
@@ -61,10 +61,6 @@ private final Employee expectedEmployee = new Employee
         assertTrue(underTest.findAll().contains(expectedEmployee));
         assertEquals(expectedEmployee, result);
     }
-    @Test
-    void find() {
-    }
-
     @Test
     void findAll_shouldReturnEmployeeListWhenEmployeeInMap() {
         Employee employee = new Employee("Lara", "kroft", 1,100_000);
